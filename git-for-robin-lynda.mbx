@@ -26,10 +26,13 @@
             <title>Typical workflow</title>
             <ol>
                 <li>
-                    <p>Switch to (<term>checkout</term>) the master branch of your project:<cd>git checkout master</cd></p>
+                    <p>Once only, and only for non-overlords: go to GitHub page for the project and <term>fork</term> the repository. Then clone your fork to your local machine.</p>
                 </li>
                 <li>
-                    <p>Update the master branch from upstream, probably with<cd>git pull origin master</cd></p>
+                    <p>Switch to (<term>checkout</term>) the master branch of your fork:<cd>git checkout master</cd></p>
+                </li>
+                <li>
+                    <p>Update the master branch from upstream, probably with<cd>git pull upstream master</cd> (<c>origin master</c>, for non-overlords)</p>
                 </li>
                 <li>
                     <p>Checkout your topic branch:<cd>git checkout topic</cd>Try <em>never</em> to work on the master branch.</p>
