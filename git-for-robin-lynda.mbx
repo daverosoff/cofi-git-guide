@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mathbook>
+    <article xml:id="git-for-robin-and-lynda">
+        <frontmatter xml:id="git-guide">
+            <titlepage>
+                <author>
+                    <personname>Dave Rosoff</personname>
+                    <institution>The College of Idaho</institution>
+                    <date><today /></date>
+                </author>
+            </titlepage>
+        </frontmatter>
+        <title>Git Guide for the College of Idaho</title>
+        <section>
+            <title>Rules of Thumb</title>
+            <ul>
+                <li><p>Always, always, <alert>always</alert> work on a branch (the <term>topic</term> branch)</p></li>
+                <li><p>Commit often (a few times a day, probably)</p></li>
+                <li><p>Commit logical chunks</p></li>
+                <li><p>Use short commit messages</p></li>
+                <li><p>Always leave a clean working directory</p></li>
+                <li><p>The rebase steps before pushing are important, don't skip them</p></li>
+            </ul>
+        </section>
+        <section>
+            <title>Typical workflow</title>
+            <ol>
+                <li>
+                    <p>Switch to (<term>checkout</term>) the master branch of your project:<cd>git checkout master</cd></p>
+                </li>
+                <li>
+                    <p>Update the master branch from upstream, probably with<cd>git pull origin master</cd></p>
+                </li>
+                <li>
+                    <p>Checkout your topic branch:<cd>git checkout topic</cd>Try <em>never</em> to work on the master branch.</p>
+                </li>
+                <li xml:id="rebase">
+                    <p>Rebase your topic branch onto the master branch:<cd>git rebase --ff-only master</cd>This incorporates recent changes in the master branch into your topic branch.</p>
+                </li>
+                <li xml:id="pull-or-continue">
+                    <p>If work on this branch is complete, goto <xref ref="pull-request">Step</xref>. Otherwise, continue to the next step.</p>
+                </li>
+                <li>
+                    <p>Do some work<mdash />not too much!</p>
+                </li>
+                <li>
+                    <p>Commit your changes.</p>
+                </li>
+                <li>
+                    <p>If you're done for the day, push your changes to a remote:<cd>git push origin topic</cd>Else, goto <xref ref="pull-or-continue">Step</xref>.</p>
+                </li>
+                <li xml:id="pull-request">
+                    <p>You remembered to rebase, right? (You did that in <xref ref="rebase">Step</xref>.) If you didn't already, push your rebased branch to your remote:<cd>git push origin topic</cd></p>
+                </li>
+                <li>
+                    <p>Visit your GitHub page for your fork of the repository. Click the button that says <q>New pull request</q>. Ask to merge the topic branch of your fork into the <em>master</em> branch of the base (upstream) repository. This is your chance to review the changes one last time: you can see a side-by-side comparison of the master branch (red) and your branch you are asking to merge (green). Add any comments or message you like, and click the big green button that says <q>Create pull request</q>. You're done!</p>
+                </li>
+                <li>
+                    <p>If you push any more commits to this branch (on the remote), they are added to the pull request without you doing anything. Try to minimize how often you do this. Instead, wait to do a PR until you're basically done and ready to work on something else for a while.</p>
+                </li>
+                <li>
+                    <p>After you receive notification that your PR has been accepted, you can update your master branch (which of course you've done a few times already <ellipsis />) using <cd>git pull origin master</cd>while on the master branch.</p>
+                </li>
+                <li>
+                    <p>Safely delete your topic branch using <cd>git branch -d topic</cd>If <c>git</c> complains, but you are sure it is safe to delete the branch, use a capital <q>D</q> to force the issue.</p>
+                </li>
+            </ol>
+        </section>
+        <section>
+            <title>Quick fixes</title>
+            <!-- <dl> -->
+            <subsection>
+                <title>Accidentally working on master.</title>
+                <p>Forget to switch to a new branch and change a few files? No problem, just use <cd>git checkout -b topic</cd> to create and switch to a new topic branch. Your uncommitted changes will come with you. If you already have a branch, just check it out as usual:<cd>git checkout topic</cd>Then, commit your changes and you're good to go.</p>
+                <p>If you committed the changes already, no problem. Suppose you made 3 commits. Then issue the command <cd>git reset --cached HEAD~3</cd> This keeps the files as they are, but resets the repository to the last commit before you starting making changes. Execute <cd>git checkout topic</cd> with or without <c>-b</c> as appropriate (see above). You can use the hexadecimal commit hash instead of the relative commit path <c>HEAD~3</c> if you want to.</p>
+            </subsection>
+            <subsection>
+                <title>Made some dumb changes I'd rather throw away.</title>
+                <p>To throw away uncommitted changes in <c>good_file_gone_bad.mbx</c>, run <cd>git checkout -- good_file_gone_bad.mbx</cd>. If you committed the changes and you're sure you still want to abandon them, find a commit that is safe to revert to (<c>HEAD~1</c> is the last but one commit, <eg/>, or you can use a hexadecimal commit hash). Then do <cd>git reset --hard HEAD~1</cd> to revert the repository to the state represented by that commit.</p>
+            </subsection>
+            <subsection>
+                <title>I want to keep just one file from this commit and throw away the rest, reverting to the immediately previous commit.</title>
+                <p>There are fancier ways, but this is simple: copy the file you like to a safe place (outside the repo). Then revert as above. To abandon uncommitted changes:<cd>git checkout --</cd>To throw away the most recent commit:<cd>git reset --hard HEAD~1</cd>Move your saved file back into the repo, overwriting if necessary. Commit the change.</p>
+            </subsection>
+            <subsection>
+                <title>I want to <c>git push</c>, but it says I have to <c>git pull</c> first.</title>
+                <p>Have you already committed your changes? Follow the directions <url href="http://stackoverflow.com/questions/1125968/how-to-force-git-pull-to-overwrite-local-files">here</url>, <alert>very carefully</alert>. If your changes are not committed, try</p>
+                <console>
+                    <input>git stash</input>
+                    <input>git pull origin master</input>
+                    <input>git stash pop</input>
+                </console>
+                <p>You may still need to resolve some conflicts.</p>
+            </subsection>
+            <!-- </dl> -->
+        </section>
+    </article>
+</mathbook>
