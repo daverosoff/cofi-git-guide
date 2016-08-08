@@ -20,6 +20,7 @@
                 <li><p>Use short commit messages</p></li>
                 <li><p>Always leave a clean working directory</p></li>
                 <li><p>The rebase steps before pushing are important, don't skip them</p></li>
+                <li><p>Topic branches should not have children</p></li>
             </ul>
         </section>
         <section>
@@ -38,7 +39,7 @@
                     <p>Checkout your topic branch:<cd>git checkout topic</cd>Try <em>never</em> to work on the master branch.</p>
                 </li>
                 <li xml:id="rebase">
-                    <p>Rebase your topic branch onto the master branch:<cd>git rebase --ff-only master</cd>This incorporates recent changes in the master branch into your topic branch.</p>
+                    <p>Rebase your topic branch onto the master branch:<cd>git rebase --ff-only master</cd>This incorporates recent changes in the master branch into your topic branch. Note that if your topic branch has a child branch, it will be orphaned (and possibly lost) during this rebase, since the commit hashes all change. That's why topic branches shouldn't have children.</p>
                 </li>
                 <li xml:id="pull-or-continue">
                     <p>If work on this branch is complete, goto <xref ref="pull-request">Step</xref>. Otherwise, continue to the next step.</p>
