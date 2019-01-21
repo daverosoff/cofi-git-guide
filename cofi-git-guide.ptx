@@ -33,6 +33,19 @@
                     <p>Switch to (<term>checkout</term>) the master branch of your fork:<cd>git checkout master</cd></p>
                 </li>
                 <li>
+                    <p>The <em>remote</em> corresponding to your Github fork is called <c>origin</c>. Let's add another remote corresponding to the main project:</p>
+                    <sidebyside>
+                        <console>
+                            <prompt>$ </prompt>
+                            <input>git remote add upstream</input>
+
+                            <prompt>$ </prompt>
+                            <input>git remote set-url upstream address</input>
+                        </console>
+                    </sidebyside>
+                    <p>Here, instead of <c>address</c>, enter the address of the project on Github.</p>
+                </li>
+                <li>
                     <p>Update the master branch from upstream, probably with<cd>git pull upstream master</cd></p>
                 </li>
                 <li>
