@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mathbook>
-    <article xml:id="git-for-robin-and-lynda">
+    <article xml:id="cofi-git-guide">
         <frontmatter xml:id="git-guide">
             <titlepage>
                 <author>
