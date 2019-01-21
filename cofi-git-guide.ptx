@@ -240,6 +240,10 @@
             </subsection>
             <!-- </dl> -->
         </section>
+        <section xml:id="section-postscript">
+            <title>Postscript</title>
+            <p>Thanks for reading this guide. If you have anything to add or any questions, leave an issue at <url>https://github.com/daverosoff/cofi-git-guide</url>.</p>
+        </section>
     </article>
 </mathbook>
 
